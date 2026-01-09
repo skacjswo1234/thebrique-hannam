@@ -1,0 +1,2954 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE BRIQUE HANNAM | Wedding Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f5f1eb;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Menu Button & Sidebar */
+        .menu-button {
+            position: fixed !important;
+            top: 30px !important;
+            right: 30px !important;
+            left: auto !important;
+            z-index: 10000;
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border: 2px solid #1a1a1a;
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            gap: 3px;
+            padding: 8px;
+        }
+
+        .menu-button:hover {
+            background-color: #f5f1eb;
+            transform: scale(1.05);
+        }
+
+        .menu-button.scrolled {
+            background-color: transparent !important;
+            border-color: transparent !important;
+        }
+
+        .menu-button.scrolled:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .menu-button.scrolled .menu-line {
+            background-color: #1a1a1a !important;
+        }
+
+        .menu-button-text {
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-top: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .menu-button.scrolled .menu-button-text {
+            color: #1a1a1a !important;
+        }
+
+        .menu-line {
+            width: 20px;
+            height: 2px;
+            background-color: #1a1a1a;
+            transition: all 0.3s ease;
+        }
+
+        .menu-line.plus {
+            width: 2px;
+            height: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+            transition: all 0.3s ease;
+        }
+
+        .menu-button.active .menu-line:first-child {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .menu-button.active .menu-line:last-child {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .menu-button.active .menu-line.plus {
+            opacity: 0;
+            transform: translate(-50%, -50%) rotate(90deg) scale(0);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            max-width: 85vw;
+            height: 100vh;
+            background-color: white;
+            z-index: 9999;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+            border-left: 2px solid #1a1a1a;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar-content {
+            padding: 80px 40px 40px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-menu a {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 8px 0;
+            border-bottom: 1px solid transparent;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .sidebar-menu a::before {
+            content: '+';
+            position: absolute;
+            left: 0;
+            font-weight: 300;
+            opacity: 0.5;
+        }
+
+        .sidebar-menu a:hover {
+            padding-left: 40px;
+            border-bottom-color: #1a1a1a;
+            color: #333;
+        }
+
+        .sidebar-menu a:hover::before {
+            opacity: 1;
+        }
+
+        /* Mobile Menu Button */
+        @media (max-width: 768px) {
+            .menu-button {
+                position: fixed !important;
+                top: 20px !important;
+                right: 20px !important;
+                left: auto !important;
+                width: 48px;
+                height: 48px;
+                gap: 4px;
+                padding: 8px;
+            }
+
+            .menu-button-text {
+                font-size: 0.6rem;
+                margin-top: 1px;
+            }
+
+            .menu-line {
+                width: 18px;
+            }
+
+            .menu-line.plus {
+                height: 18px;
+            }
+
+            .sidebar {
+                width: 320px;
+                max-width: 90vw;
+            }
+
+            .sidebar-content {
+                padding: 60px 30px 30px;
+            }
+
+            .sidebar-menu a {
+                font-size: 0.9rem;
+                padding: 6px 0;
+                padding-left: 25px;
+            }
+        }
+
+        /* Hero Section - Trendy */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 700px;
+            background-color: #000;
+            overflow: hidden;
+            border: 2px solid #1a1a1a;
+            border-top: none;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transform: scale(1.1);
+            transition: transform 20s ease;
+        }
+
+        .hero:hover .hero-image {
+            transform: scale(1.05);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .hero-text {
+            position: absolute;
+            top: 28%;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            z-index: 2;
+            line-height: 1.4;
+        }
+
+        .hero-text .brand-name {
+            display: block;
+            font-weight: 400;
+            letter-spacing: 8px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .hero-text .showcase-title {
+            display: block;
+            font-weight: 200;
+            letter-spacing: 4px;
+            font-size: 0.85em;
+            opacity: 0.95;
+            line-height: 1.5;
+            font-style: normal;
+        }
+
+        .hero-text .plus {
+            display: none;
+        }
+
+        /* Flower Petals Animation */
+        .flower-petals {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg);
+            animation: fall linear infinite;
+            opacity: 0.8;
+            filter: blur(0.5px);
+        }
+
+        .petal::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50% 0 50% 50%;
+            top: 2px;
+            left: 2px;
+            transform: rotate(-45deg);
+        }
+
+        .petal:nth-child(1) {
+            left: 10%;
+            animation-duration: 15s;
+            animation-delay: 0s;
+        }
+
+        .petal:nth-child(2) {
+            left: 20%;
+            animation-duration: 18s;
+            animation-delay: 2s;
+            width: 16px;
+            height: 16px;
+        }
+
+        .petal:nth-child(3) {
+            left: 30%;
+            animation-duration: 20s;
+            animation-delay: 1s;
+            width: 24px;
+            height: 24px;
+        }
+
+        .petal:nth-child(4) {
+            left: 40%;
+            animation-duration: 16s;
+            animation-delay: 3s;
+            width: 18px;
+            height: 18px;
+        }
+
+        .petal:nth-child(5) {
+            left: 50%;
+            animation-duration: 19s;
+            animation-delay: 1.5s;
+        }
+
+        .petal:nth-child(6) {
+            left: 60%;
+            animation-duration: 17s;
+            animation-delay: 2.5s;
+            width: 22px;
+            height: 22px;
+        }
+
+        .petal:nth-child(7) {
+            left: 70%;
+            animation-duration: 21s;
+            animation-delay: 0.5s;
+            width: 16px;
+            height: 16px;
+        }
+
+        .petal:nth-child(8) {
+            left: 80%;
+            animation-duration: 18s;
+            animation-delay: 3.5s;
+        }
+
+        .petal:nth-child(9) {
+            left: 90%;
+            animation-duration: 16s;
+            animation-delay: 2s;
+            width: 20px;
+            height: 20px;
+        }
+
+        .petal:nth-child(10) {
+            left: 15%;
+            animation-duration: 20s;
+            animation-delay: 4s;
+            width: 18px;
+            height: 18px;
+        }
+
+        .petal:nth-child(11) {
+            left: 25%;
+            animation-duration: 17s;
+            animation-delay: 1s;
+        }
+
+        .petal:nth-child(12) {
+            left: 35%;
+            animation-duration: 19s;
+            animation-delay: 3s;
+            width: 16px;
+            height: 16px;
+        }
+
+        .petal:nth-child(13) {
+            left: 45%;
+            animation-duration: 18s;
+            animation-delay: 0.5s;
+            width: 22px;
+            height: 22px;
+        }
+
+        .petal:nth-child(14) {
+            left: 55%;
+            animation-duration: 16s;
+            animation-delay: 2.5s;
+        }
+
+        .petal:nth-child(15) {
+            left: 65%;
+            animation-duration: 21s;
+            animation-delay: 1.5s;
+            width: 20px;
+            height: 20px;
+        }
+
+        .petal:nth-child(16) {
+            left: 75%;
+            animation-duration: 17s;
+            animation-delay: 3s;
+            width: 18px;
+            height: 18px;
+        }
+
+        .petal:nth-child(17) {
+            left: 85%;
+            animation-duration: 19s;
+            animation-delay: 1s;
+        }
+
+        .petal:nth-child(18) {
+            left: 95%;
+            animation-duration: 18s;
+            animation-delay: 2s;
+            width: 16px;
+            height: 16px;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) translateX(0) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            50% {
+                transform: translateY(50vh) translateX(20px) rotate(135deg);
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(100vh) translateX(-20px) rotate(225deg);
+                opacity: 0;
+            }
+        }
+
+        /* Additional petals for more natural effect */
+        .petal:nth-child(19),
+        .petal:nth-child(20),
+        .petal:nth-child(21),
+        .petal:nth-child(22),
+        .petal:nth-child(23) {
+            width: 14px;
+            height: 14px;
+            animation-duration: 22s;
+        }
+
+        .petal:nth-child(19) {
+            left: 5%;
+            animation-delay: 5s;
+        }
+
+        .petal:nth-child(20) {
+            left: 27%;
+            animation-delay: 6s;
+        }
+
+        .petal:nth-child(21) {
+            left: 52%;
+            animation-delay: 7s;
+        }
+
+        .petal:nth-child(22) {
+            left: 73%;
+            animation-delay: 4.5s;
+        }
+
+        .petal:nth-child(23) {
+            left: 88%;
+            animation-delay: 6.5s;
+        }
+
+        /* Hero Intro Section - New Separate Section */
+        .hero-intro-section {
+            padding: 100px 60px;
+            background-color: #f5f1eb;
+            border: 2px solid #1a1a1a;
+            margin: -2px 0;
+            text-align: center;
+        }
+
+        .hero-intro-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-intro-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #333;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        .cta-button {
+            position: absolute;
+            bottom: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 18px 50px;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            font-size: 0.95rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+            font-weight: 400;
+        }
+
+        .cta-button:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            border-color: white;
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Table of Contents Section - Trendy */
+        .contents-section {
+            position: relative;
+            padding: 120px 80px;
+            background: linear-gradient(135deg, #e8e5e0 0%, #f0ede8 100%);
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(0,0,0,0.04) 1px, transparent 0);
+            background-size: 25px 25px;
+            min-height: 900px;
+            box-shadow: inset -8px 0 20px rgba(0,0,0,0.08);
+            border: 2px solid #1a1a1a;
+            margin: -2px 0;
+        }
+
+        .contents-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 8px;
+            background: linear-gradient(to right, rgba(0,0,0,0.15), transparent);
+        }
+
+        .contents-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .contents-number {
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+
+        .contents-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .contents-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contents-section-item {
+            margin-bottom: 50px;
+        }
+
+        .contents-main-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.15);
+        }
+
+        .contents-main-info {
+            flex: 1;
+        }
+
+        .contents-main-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .contents-main-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 10px;
+        }
+
+        .contents-sub-items {
+            margin-top: 25px;
+        }
+
+        .contents-sub-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 18px;
+            padding-left: 50px;
+            padding: 12px 0 12px 50px;
+            transition: all 0.3s ease;
+            border-left: 2px solid transparent;
+        }
+
+        .contents-sub-item:hover {
+            padding-left: 60px;
+            border-left-color: #2c2c2c;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .contents-sub-info {
+            flex: 1;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .contents-sub-number {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
+        }
+
+        .contents-sub-separator {
+            font-size: 0.95rem;
+            color: #1a1a1a;
+            margin: 0 5px;
+        }
+
+        .contents-sub-title {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .contents-page-number {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .contents-footer {
+            position: absolute;
+            bottom: 40px;
+            right: 80px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+
+        /* Detail Section Styles - Trendy Layout */
+        .detail-section {
+            position: relative;
+            padding: 120px 60px;
+            background-color: #f5f1eb;
+            overflow: hidden;
+            border: 2px solid #1a1a1a;
+            margin: -2px 0;
+        }
+
+        .detail-section:nth-child(even) {
+            background-color: #faf9f7;
+        }
+
+        .detail-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+            padding: 60px 0;
+        }
+
+        @media (max-width: 1024px) {
+            .detail-wrapper {
+                gap: 60px;
+                padding: 50px 0;
+            }
+        }
+
+        .detail-section.reverse .detail-wrapper {
+            grid-template-columns: 1fr 1.2fr;
+        }
+
+        .detail-section.reverse .detail-image-wrapper {
+            order: 2;
+        }
+
+        .detail-section.reverse .detail-content {
+            order: 1;
+        }
+
+        .detail-image-wrapper {
+            position: relative;
+            transform: rotate(-2deg);
+            transition: transform 0.6s ease;
+            border-right: 2px solid #1a1a1a;
+            padding-right: 60px;
+            margin-right: 60px;
+        }
+
+        .detail-section.reverse .detail-image-wrapper {
+            border-right: none;
+            border-left: 2px solid #1a1a1a;
+            padding-right: 0;
+            padding-left: 60px;
+            margin-right: 0;
+            margin-left: 60px;
+        }
+
+        .detail-section:hover .detail-image-wrapper {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .detail-section.reverse:hover .detail-image-wrapper {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .detail-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            box-shadow: -20px 20px 0 rgba(0,0,0,0.08);
+            border: 1px solid #1a1a1a;
+        }
+
+        .detail-section.reverse .detail-image {
+            box-shadow: 20px 20px 0 rgba(0,0,0,0.08);
+        }
+
+        .detail-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .detail-sub-number {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: #999;
+            margin-bottom: 15px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        .detail-sub-title {
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            line-height: 1.3;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            margin-bottom: 40px;
+            font-weight: 600;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 20px;
+        }
+
+        .detail-section .brand-description {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #444;
+            margin-bottom: 40px;
+            letter-spacing: 0.3px;
+        }
+
+        /* Mobile Hero Intro Section */
+        @media (max-width: 768px) {
+            .hero-intro-section {
+                padding: 60px 30px;
+            }
+
+            .hero-intro-container {
+                max-width: 100%;
+            }
+
+            .hero-intro-text {
+                font-size: 15px !important;
+                line-height: 1.8 !important;
+                letter-spacing: 0.3px;
+                text-align: left;
+                padding: 0 10px;
+            }
+
+            /* Mobile Detail Sections - Improved Layout */
+            .detail-section {
+                padding: 60px 30px !important;
+            }
+
+            .detail-wrapper {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+                padding: 40px 0 !important;
+            }
+
+            .detail-image-wrapper {
+                transform: rotate(0deg) !important;
+                border-right: none !important;
+                border-left: none !important;
+                border-bottom: 2px solid #1a1a1a !important;
+                padding: 0 0 25px 0 !important;
+                margin: 0 0 25px 0 !important;
+            }
+
+            .detail-section.reverse .detail-image-wrapper {
+                border-left: none !important;
+                border-right: none !important;
+                border-bottom: 2px solid #1a1a1a !important;
+                padding: 0 0 25px 0 !important;
+                margin: 0 0 25px 0 !important;
+            }
+
+            .detail-image {
+                height: 280px !important;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
+            }
+
+            .detail-content {
+                padding: 0 !important;
+            }
+
+            .detail-sub-title {
+                font-size: 20px !important;
+                font-weight: 600 !important;
+                line-height: 1.35 !important;
+                margin-bottom: 20px !important;
+                padding-bottom: 15px !important;
+            }
+
+            .detail-section .brand-description {
+                font-size: 14px !important;
+                line-height: 1.7 !important;
+                margin-bottom: 25px !important;
+            }
+
+            .services-list,
+            .interests-list {
+                margin-top: 20px !important;
+            }
+
+            .services-list li,
+            .interests-list li {
+                font-size: 14px !important;
+                font-weight: 500 !important;
+                line-height: 1.6 !important;
+                padding: 6px 0 !important;
+            }
+
+            /* Mobile Brand Section */
+            .brand-section {
+                grid-template-columns: 1fr !important;
+            }
+
+            .brand-image {
+                border-right: none !important;
+                border-bottom: 2px solid #1a1a1a !important;
+                height: 300px !important;
+            }
+
+            .brand-content {
+                padding: 50px 30px !important;
+            }
+
+            .section-heading {
+                font-size: 20px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .brand-description {
+                font-size: 14px !important;
+                line-height: 1.7 !important;
+                margin-bottom: 30px !important;
+            }
+
+            .small-image {
+                height: 200px !important;
+                margin-bottom: 30px !important;
+            }
+
+            /* Mobile Quote Section */
+            .quote-section {
+                padding: 80px 30px !important;
+            }
+
+            .quote {
+                font-size: 16px !important;
+                line-height: 1.8 !important;
+                padding: 0 20px;
+            }
+
+            /* Mobile Benefits Section */
+            .benefits-section {
+                padding: 80px 30px !important;
+            }
+
+            .benefit-item {
+                padding: 40px 25px !important;
+            }
+
+            .benefit-number {
+                font-size: 3rem !important;
+                margin-bottom: 15px !important;
+            }
+
+            .benefit-title {
+                font-size: 18px !important;
+                margin-bottom: 15px !important;
+                padding-bottom: 10px !important;
+            }
+
+            .benefit-description {
+                font-size: 13px !important;
+                line-height: 1.7 !important;
+            }
+
+            /* Mobile Inquiry Section */
+            .inquiry-section {
+                padding: 80px 30px !important;
+            }
+
+            .inquiry-container {
+                padding: 50px 30px !important;
+            }
+
+            .form-section {
+                margin-top: 30px !important;
+                padding-top: 30px !important;
+            }
+
+            .form-section-title {
+                font-size: 18px !important;
+                margin-bottom: 20px !important;
+                padding-bottom: 10px !important;
+            }
+
+            .form-input,
+            .form-select,
+            .form-textarea {
+                font-size: 15px !important;
+                padding: 14px !important;
+            }
+
+            .form-label {
+                font-size: 13px !important;
+            }
+        }
+
+        /* Middle Section - The Brand */
+        .brand-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+            background-color: #f5f1eb;
+            border: 2px solid #1a1a1a;
+            margin: -2px 0;
+        }
+
+        .brand-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-right: 2px solid #1a1a1a;
+        }
+
+        .brand-content {
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .section-heading {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #2c2c2c;
+            margin-bottom: 30px;
+            font-weight: 600;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 15px;
+        }
+
+        .brand-description {
+            font-size: 1.05rem;
+            line-height: 2;
+            color: #444;
+            margin-bottom: 40px;
+            letter-spacing: 0.3px;
+        }
+
+        .small-image {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            object-fit: cover;
+            margin-bottom: 40px;
+        }
+
+        .services-list {
+            list-style: none;
+        }
+
+        .services-list li {
+            padding: 8px 0;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .services-list li:before {
+            content: "+ ";
+            margin-right: 10px;
+            color: #2c2c2c;
+        }
+
+        /* Quote Section - Trendy */
+        .quote-section {
+            padding: 150px 80px;
+            background: linear-gradient(135deg, #f5f1eb 0%, #faf9f7 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #1a1a1a;
+            margin: -2px 0;
+        }
+
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, #2c2c2c);
+        }
+
+        .quote {
+            font-size: 1.8rem;
+            line-height: 2;
+            letter-spacing: 3px;
+            color: #1a1a1a;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-transform: uppercase;
+            font-weight: 200;
+            position: relative;
+        }
+
+        .quote::before,
+        .quote::after {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(44, 44, 44, 0.15);
+            position: absolute;
+            font-weight: 100;
+        }
+
+        .quote::before {
+            top: -30px;
+            left: -60px;
+        }
+
+        .quote::after {
+            bottom: -60px;
+            right: -60px;
+        }
+
+        /* Designer Section */
+        .designer-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 700px;
+            background-color: #f5f1eb;
+        }
+
+        .designer-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .designer-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .designer-overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 2.5rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 300;
+            z-index: 2;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        }
+
+        .designer-content {
+            padding: 80px 60px;
+        }
+
+        .designer-bio {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 60px;
+        }
+
+        .designer-bio a {
+            color: #2c2c2c;
+            text-decoration: underline;
+        }
+
+        .interests-list {
+            list-style: none;
+        }
+
+        .interests-list li {
+            padding: 8px 0;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .interests-list li:before {
+            content: "+ ";
+            margin-right: 10px;
+            color: #2c2c2c;
+        }
+
+        /* Benefits Section - Trendy Card Layout */
+        .benefits-section {
+            padding: 150px 60px;
+            background: linear-gradient(180deg, #faf9f7 0%, #f5f1eb 100%);
+            position: relative;
+            border: 2px solid #1a1a1a;
+            margin: -2px 0;
+        }
+
+        .benefits-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #1a1a1a;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .benefit-item {
+            padding: 60px 40px;
+            background-color: white;
+            border: none;
+            text-align: left;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+        }
+
+        .benefit-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #2c2c2c, transparent);
+            transform: scaleY(0);
+            transition: transform 0.5s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+
+        .benefit-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .benefit-number {
+            font-size: 4.5rem;
+            font-weight: 200;
+            color: #2c2c2c;
+            margin-bottom: 25px;
+            letter-spacing: 4px;
+            line-height: 1;
+            opacity: 0.9;
+        }
+
+        .benefit-title {
+            font-size: 1.15rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 12px;
+        }
+
+        .benefit-description {
+            font-size: 0.95rem;
+            line-height: 2;
+            color: #666;
+            letter-spacing: 0.5px;
+        }
+
+        .benefit-item:last-child {
+            grid-column: 1 / -1;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Inquiry Form Section */
+        .inquiry-section {
+            padding: 150px 60px;
+            background: linear-gradient(180deg, #f5f1eb 0%, #faf9f7 100%);
+            position: relative;
+            border: 2px solid #1a1a1a;
+            margin: -2px 0;
+        }
+
+        .inquiry-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 80px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border: 1px solid #1a1a1a;
+        }
+
+        .inquiry-form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #2c2c2c;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #fafafa;
+            font-size: 1rem;
+            color: #333;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #2c2c2c;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(44, 44, 44, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .date-group {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .date-label {
+            font-size: 0.85rem;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        .date-input-wrapper {
+            position: relative;
+        }
+
+        .date-input-wrapper input[type="date"] {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #fafafa;
+            font-size: 1rem;
+            color: #333;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .date-input-wrapper input[type="date"]:focus {
+            outline: none;
+            border-color: #2c2c2c;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(44, 44, 44, 0.1);
+        }
+
+        .form-section {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+
+        .form-section-title {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #2c2c2c;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 12px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #2c2c2c;
+        }
+
+        .checkbox-label {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #444;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+        }
+
+        .form-submit-button {
+            padding: 18px 50px;
+            background-color: #2c2c2c;
+            color: white;
+            border: none;
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            align-self: flex-start;
+            font-weight: 400;
+            margin-top: 20px;
+        }
+
+        .form-submit-button:hover {
+            background-color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .form-submit-button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 60px 50px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #999;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #2c2c2c;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #2c2c2c;
+            margin-bottom: 30px;
+            font-weight: 600;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 15px;
+        }
+
+        .modal-message {
+            font-size: 1rem;
+            line-height: 2;
+            color: #444;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-message p {
+            margin-bottom: 15px;
+        }
+
+        /* Footer - Trendy */
+        .footer {
+            background: linear-gradient(180deg, #f5f1eb 0%, #faf9f7 100%);
+            padding: 100px 60px 50px;
+            position: relative;
+            border: 2px solid #1a1a1a;
+            border-top: 2px solid #1a1a1a;
+            margin: -2px 0 0 0;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #1a1a1a;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 15px;
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: #666;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .download-section {
+            max-width: 350px;
+        }
+
+        .resource-title {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .email-input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            background-color: white;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        .submit-button {
+            padding: 12px 30px;
+            background-color: #2c2c2c;
+            color: white;
+            border: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .submit-button:hover {
+            background-color: #000;
+        }
+
+        .contact-section ul,
+        .social-section ul {
+            list-style: none;
+        }
+
+        .contact-section ul li,
+        .social-section ul li {
+            padding: 6px 0;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .contact-section ul li a,
+        .social-section ul li a {
+            color: #333;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-section ul li a:hover,
+        .social-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            border-top: 2px solid #1a1a1a;
+            padding-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .footer-bottom a {
+            font-size: 0.85rem;
+            color: #666;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* Floating Action Buttons */
+        .fab-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .fab-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: #2c2c2c;
+            color: white;
+            border: 2px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .fab-button:hover {
+            background-color: #1a1a1a;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .fab-button:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .fab-button.top {
+            background-color: #1a1a1a;
+        }
+
+        .fab-button.phone {
+            background-color: #2c2c2c;
+        }
+
+        .fab-button svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            stroke: white;
+            stroke-width: 0;
+        }
+
+        /* Hide top button initially */
+        #topBtn {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-text {
+                font-size: 2.5rem;
+            }
+
+            .brand-section,
+            .designer-section,
+            .detail-section {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-section.reverse .detail-image,
+            .detail-section.reverse .detail-content {
+                order: initial;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contents-section {
+                padding: 80px 60px;
+            }
+
+            .contents-footer {
+                right: 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Mobile Hero Title - Premium & Natural */
+            .hero-text {
+                font-size: 30px !important;
+                font-weight: 400 !important;
+                letter-spacing: 4px !important;
+                line-height: 1.5 !important;
+                padding: 0 30px !important;
+                top: 32% !important;
+            }
+
+            .hero-text .brand-name {
+                font-size: 1em !important;
+                font-weight: 450 !important;
+                letter-spacing: 5px !important;
+                margin-bottom: 10px !important;
+                line-height: 1.25 !important;
+                letter-spacing: 5.5px !important;
+            }
+
+            .hero-text .showcase-title {
+                font-size: 0.72em !important;
+                font-weight: 300 !important;
+                letter-spacing: 2.5px !important;
+                opacity: 0.92 !important;
+                line-height: 1.5 !important;
+                margin-top: 2px !important;
+                font-style: normal !important;
+            }
+
+
+            .quote {
+                font-size: 1.1rem;
+            }
+
+            .brand-content,
+            .designer-content,
+            .detail-content {
+                padding: 60px 40px;
+            }
+
+
+            .detail-sub-title {
+                font-size: 1.5rem;
+            }
+
+            /* Mobile Hero Title */
+            .hero-text {
+                font-size: 28px !important;
+                font-weight: 700 !important;
+                letter-spacing: 3px;
+                padding: 0 20px;
+                line-height: 1.3 !important;
+            }
+
+            /* Mobile Hero Sub Description */
+            .hero-intro {
+                font-size: 15px !important;
+                font-weight: 400 !important;
+                line-height: 1.5 !important;
+                letter-spacing: 0.5px;
+            }
+
+            /* Mobile Section Titles */
+            .section-heading {
+                font-size: 21px !important;
+                font-weight: 600 !important;
+                line-height: 1.3 !important;
+                letter-spacing: 3px;
+            }
+
+            .detail-sub-title {
+                font-size: 21px !important;
+                font-weight: 600 !important;
+                line-height: 1.3 !important;
+            }
+
+            .contents-main-title {
+                font-size: 21px !important;
+                font-weight: 600 !important;
+            }
+
+            .benefit-title {
+                font-size: 21px !important;
+                font-weight: 600 !important;
+                line-height: 1.3 !important;
+            }
+
+            .form-section-title {
+                font-size: 21px !important;
+                font-weight: 600 !important;
+                line-height: 1.3 !important;
+            }
+
+            /* Mobile Section Description Text */
+            .brand-description,
+            .detail-section .brand-description,
+            .designer-bio,
+            .benefit-description {
+                font-size: 14px !important;
+                font-weight: 400 !important;
+                line-height: 1.65 !important;
+            }
+
+            /* Mobile Bullet/Highlight Text */
+            .services-list li,
+            .interests-list li {
+                font-size: 15px !important;
+                font-weight: 500 !important;
+                line-height: 1.6 !important;
+            }
+
+            /* Mobile CTA Button */
+            .cta-button {
+                font-size: 17px !important;
+                font-weight: 700 !important;
+                padding: 14px 40px !important;
+                min-height: 52px !important;
+                letter-spacing: 2px;
+            }
+
+            .form-submit-button {
+                font-size: 17px !important;
+                font-weight: 700 !important;
+                padding: 14px 40px !important;
+                min-height: 52px !important;
+                letter-spacing: 2px;
+            }
+
+            /* Mobile Petals */
+            .petal {
+                width: 14px !important;
+                height: 14px !important;
+            }
+
+            .petal::before {
+                width: 8px !important;
+                height: 8px !important;
+            }
+
+            .petal:nth-child(odd) {
+                width: 12px !important;
+                height: 12px !important;
+            }
+
+            .petal:nth-child(3n) {
+                width: 16px !important;
+                height: 16px !important;
+            }
+
+            .quote {
+                font-size: 1.2rem;
+            }
+
+            .contents-section {
+                padding: 60px 40px;
+                min-height: auto;
+            }
+
+            .contents-title {
+                font-size: 1.2rem;
+            }
+
+            .contents-main-title {
+                font-size: 1rem;
+            }
+
+            .contents-sub-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 30px;
+            }
+
+            .contents-page-number {
+                margin-top: 5px;
+                text-align: left;
+                min-width: auto;
+            }
+
+            .contents-footer {
+                position: static;
+                text-align: right;
+                margin-top: 40px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefit-item {
+                grid-column: 1 !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+            }
+
+            .benefits-section {
+                padding: 60px 40px;
+            }
+
+            .benefit-number {
+                font-size: 2.5rem;
+            }
+
+            .inquiry-container {
+                padding: 50px 40px;
+            }
+
+            .date-group {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .date-label {
+                margin-bottom: 5px;
+            }
+
+            .brand-section {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-image {
+                border-right: none !important;
+                border-bottom: 2px solid #1a1a1a !important;
+            }
+
+            /* Mobile Contents Section */
+            .contents-section {
+                padding: 60px 30px !important;
+                min-height: auto !important;
+            }
+
+            /* Mobile Contents Header - Fix Overlap */
+            .contents-header {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                justify-content: flex-start !important;
+                gap: 15px !important;
+                margin-bottom: 50px !important;
+            }
+
+            .contents-number {
+                position: static !important;
+                font-size: 0.9rem !important;
+                margin-bottom: 0 !important;
+            }
+
+            .contents-title {
+                font-size: 18px !important;
+                text-align: left !important;
+                margin: 0 !important;
+            }
+
+            .contents-main-title {
+                font-size: 16px !important;
+            }
+
+            .contents-sub-title {
+                font-size: 13px !important;
+                line-height: 1.5 !important;
+            }
+
+            .contents-main-section {
+                margin-bottom: 15px !important;
+                padding-bottom: 12px !important;
+            }
+
+            .contents-sub-items {
+                margin-top: 15px !important;
+            }
+
+            .contents-sub-item {
+                margin-bottom: 12px !important;
+                padding: 10px 0 10px 40px !important;
+            }
+
+            /* Mobile Quote Section - Improved */
+            .quote-section::before,
+            .quote-section::after {
+                display: none;
+            }
+
+            .quote {
+                font-size: 15px !important;
+                line-height: 1.7 !important;
+                letter-spacing: 1.5px;
+            }
+
+            /* Mobile Footer */
+            .footer {
+                padding: 60px 30px 40px !important;
+            }
+
+            .footer-content {
+                gap: 40px !important;
+                margin-bottom: 40px !important;
+            }
+
+            .footer-logo {
+                font-size: 1.2rem !important;
+            }
+
+            .footer-tagline {
+                font-size: 0.85rem !important;
+                line-height: 1.5 !important;
+            }
+
+            .footer-bottom {
+                margin-top: 40px !important;
+                padding-top: 15px !important;
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            /* Mobile CTA Button Position */
+            .cta-button {
+                bottom: 12% !important;
+                padding: 14px 35px !important;
+                font-size: 15px !important;
+                letter-spacing: 3px;
+            }
+
+            /* Mobile FAB */
+            .fab-container {
+                bottom: 20px;
+                right: 20px;
+                gap: 12px;
+            }
+
+            .fab-button {
+                width: 52px;
+                height: 52px;
+            }
+
+            .fab-button svg {
+                width: 22px;
+                height: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Button -->
+    <button class="menu-button" id="menuButton" aria-label="메뉴 열기">
+        <div class="menu-line"></div>
+        <div class="menu-line plus"></div>
+        <div class="menu-line"></div>
+        <span class="menu-button-text">MENU</span>
+    </button>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <ul class="sidebar-menu">
+                <li><a href="#hero">THE BRIQUE HANNAM</a></li>
+                <li><a href="#hero-intro">SHOWCASE 소개</a></li>
+                <li><a href="#contents">SHOWCASE OVERVIEW</a></li>
+                <li><a href="#section-01">THE BRIQUE HANNAM</a></li>
+                <li><a href="#section-02">핵심 마케팅 메시지</a></li>
+                <li><a href="#section-03">쇼케이스 테마</a></li>
+                <li><a href="#section-04">차별화 포인트</a></li>
+                <li><a href="#section-05">특별 혜택</a></li>
+                <li><a href="#benefits">혜택 안내</a></li>
+                <li><a href="#inquiry">문의하기</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <img src="images/5.jpg" alt="Wedding Venue" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="flower-petals">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+        </div>
+        <div class="hero-text">
+            <span class="brand-name">THE BRIQUE HANNAM</span>
+            <span class="showcase-title">Wedding Showcase</span>
+        </div>
+        <button class="cta-button">SHOWCASE 예약하기</button>
+    </section>
+
+    <!-- Hero Intro Section -->
+    <section class="hero-intro-section" id="hero-intro">
+        <div class="hero-intro-container">
+            <p class="hero-intro-text">
+                THE BRIQUE HANNAM Wedding Showcase는 결혼식을 단순한 하루의 이벤트가 아닌, '빛에서 시작되는 하나의 서사적 경험'으로 재정의하는 프로젝트입니다. 더브리크 한남 특유의 수직적 공간 구조를 적극적으로 해석하여, 빛이 위에서 아래로 흐르듯 공간 전체를 감싸고 그 빛 아래에서 결혼의 감정이 차분히 시작되고, 밝아지며, 피어나는 과정을 시각적으로 구현합니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Table of Contents Section -->
+    <section class="contents-section" id="contents">
+        <div class="contents-header">
+            <span class="contents-number">00.0</span>
+            <h2 class="contents-title">SHOWCASE OVERVIEW</h2>
+        </div>
+        <div class="contents-list">
+            <div class="contents-section-item">
+                <div class="contents-main-section">
+                    <div class="contents-main-info">
+                        <div class="contents-main-number">01</div>
+                        <div class="contents-main-title">THE BRIQUE HANNAM</div>
+                    </div>
+                </div>
+                <div class="contents-sub-items">
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">01.1</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">하우스 웨딩의 자유로움과 호텔 웨딩의 서비스</span>
+                        </div>
+                        <span class="contents-page-number">03</span>
+                    </div>
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">01.2</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">행사 전용 설계 공간에서의 완성된 웨딩</span>
+                        </div>
+                        <span class="contents-page-number">05</span>
+                    </div>
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">01.3</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">운영을 전제로 설계된 베뉴</span>
+                        </div>
+                        <span class="contents-page-number">07</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contents-section-item">
+                <div class="contents-main-section">
+                    <div class="contents-main-info">
+                        <div class="contents-main-number">02</div>
+                        <div class="contents-main-title">핵심 마케팅 메시지</div>
+                    </div>
+                </div>
+                <div class="contents-sub-items">
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">02.1</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">하우스 웨딩이지만 허술하지 않다</span>
+                        </div>
+                        <span class="contents-page-number">11</span>
+                    </div>
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">02.2</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">공간이 아니라 행사 완성도를 판다</span>
+                        </div>
+                        <span class="contents-page-number">14</span>
+                    </div>
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">02.3</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">음식이 웨딩의 격을 결정한다</span>
+                        </div>
+                        <span class="contents-page-number">16</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contents-section-item">
+                <div class="contents-main-section">
+                    <div class="contents-main-info">
+                        <div class="contents-main-number">03</div>
+                        <div class="contents-main-title">쇼케이스 테마</div>
+                    </div>
+                </div>
+                <div class="contents-sub-items">
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">03.1</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">WHEN LIGHT BEGINS: BEGIN · BRIGHT · BLOOM</span>
+                        </div>
+                        <span class="contents-page-number">19</span>
+                    </div>
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">03.2</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">빛에서 시작되는 서사적 경험</span>
+                        </div>
+                        <span class="contents-page-number">21</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contents-section-item">
+                <div class="contents-main-section">
+                    <div class="contents-main-info">
+                        <div class="contents-main-number">04</div>
+                        <div class="contents-main-title">차별화 포인트</div>
+                    </div>
+                </div>
+                <div class="contents-sub-items">
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">04.1</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">패키지 웨딩과의 명확한 차별화</span>
+                        </div>
+                        <span class="contents-page-number">25</span>
+                    </div>
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">04.2</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">공간 특화 웨딩 콘텐츠</span>
+                        </div>
+                        <span class="contents-page-number">28</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contents-section-item">
+                <div class="contents-main-section">
+                    <div class="contents-main-info">
+                        <div class="contents-main-number">05</div>
+                        <div class="contents-main-title">특별 혜택</div>
+                    </div>
+                </div>
+                <div class="contents-sub-items">
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">05.1</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">대관료 30% 할인 · 식대 10% 할인</span>
+                        </div>
+                        <span class="contents-page-number">32</span>
+                    </div>
+                    <div class="contents-sub-item">
+                        <div class="contents-sub-info">
+                            <span class="contents-sub-number">05.2</span>
+                            <span class="contents-sub-separator">/</span>
+                            <span class="contents-sub-title">아트디저트 테이블 제공 및 부케 향수 패키지</span>
+                        </div>
+                        <span class="contents-page-number">35</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contents-footer">01</div>
+    </section>
+
+    <!-- 01. THE BRIQUE HANNAM Section -->
+    <section class="detail-section" id="section-01">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/1.jpg" alt="The Brique Hannam" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">01.1</div>
+                <h2 class="detail-sub-title">하우스 웨딩의 자유로움과 호텔 웨딩의 서비스</h2>
+                <p class="brand-description">
+                    더브리크 한남은 하우스 웨딩의 자유로움과 호텔 웨딩의 서비스 퀄리티를 결합한 프리미엄 웨딩 베뉴입니다. 일반적인 웨딩홀의 경직된 분위기에서 벗어나, 자연스럽고 따뜻한 공간에서 나만의 스타일로 웨딩을 꾸밀 수 있는 자유로움을 제공합니다. 동시에 호텔 웨딩과 동일한 수준의 전문 서비스와 체계적인 관리 시스템을 갖추고 있어, 편안하면서도 완벽한 웨딩 경험을 만들어냅니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="detail-section reverse">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/2.jpg" alt="Wedding Space" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">01.2</div>
+                <h2 class="detail-sub-title">행사 전용 설계 공간에서의 완성된 웨딩</h2>
+                <p class="brand-description">
+                    일반적인 웨딩홀이 아닌, 행사 전용으로 설계된 공간에서 예식 · 피로연 · 애프터파티까지 하나의 흐름으로 진행됩니다. 더브리크 한남의 공간은 단순히 대관되는 장소가 아니라, 웨딩이라는 특별한 하루를 위한 완벽한 무대입니다. 각 영역이 유기적으로 연결되어 있으며, 커플의 스타일과 컨셉에 맞춰 공간을 자유롭게 구성할 수 있습니다. 하루 종일 이어지는 축하의 순간들이 자연스럽게 흘러가도록 설계된 공간 구조를 경험하실 수 있습니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="detail-section">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/3.jpg" alt="Operational Venue" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">01.3</div>
+                <h2 class="detail-sub-title">운영을 전제로 설계된 베뉴</h2>
+                <p class="brand-description">
+                    대관 중심의 공간이 아니라, 테이블 레이아웃 · 동선 · 연출 · 음식까지 '운영을 전제로 설계된 베뉴'입니다. 더브리크 한남은 단순히 공간만 제공하는 것이 아닙니다. 전문 플래너와 함께 테이블 배치부터 하객 동선, 조명 연출, 식음료 서빙까지 모든 요소를 사전에 시뮬레이션하고 최적화합니다. 이를 통해 하객들이 편안하게 즐길 수 있고, 커플은 자신만의 스토리를 완벽하게 전달할 수 있는 웨딩을 완성합니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02. 핵심 마케팅 메시지 Section -->
+    <section class="detail-section reverse" id="section-02">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/9.jpg" alt="Premium Service" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">02.1</div>
+                <h2 class="detail-sub-title">하우스 웨딩이지만 허술하지 않다</h2>
+                <p class="brand-description">
+                    더브리크 한남은 호텔 웨딩과 동일한 서비스 기준으로 운영됩니다. 전문 DOS(Director of Sales), RM(Reservation Manager) 체계를 갖추고 상담–운영–사후관리까지 분리된 구조로 진행됩니다. 하우스 웨딩의 아늑함과 자유로움을 유지하면서도, 호텔 웨딩의 전문성과 체계적인 서비스를 동시에 제공합니다. 초기 상담부터 당일 운영, 그리고 사후까지 모든 과정이 전문 인력에 의해 관리되므로, 커플과 가족들은 오직 행사 준비와 축하에만 집중할 수 있습니다.
+                </p>
+                <ul class="services-list" style="margin-top: 30px;">
+                    <li>전문 DOS(Director of Sales) 체계</li>
+                    <li>RM(Reservation Manager) 전담 관리</li>
+                    <li>상담–운영–사후관리 분리 운영</li>
+                    <li>호텔 웨딩 수준의 서비스 기준</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="detail-section">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/10.jpg" alt="Event Perfection" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">02.2</div>
+                <h2 class="detail-sub-title">공간이 아니라 행사 완성도를 판다</h2>
+                <p class="brand-description">
+                    테이블 배치 시뮬레이션을 통해 좌석 수 / 동선 / 시야를 사전에 설계합니다. 실제 상담에 활용 가능한 레이아웃 Mock-up & 촬영 자료를 제공하며, 웨딩 행사 목적에 맞게 공간을 유연하게 변형합니다. 더브리크 한남은 공간의 아름다움보다 중요한 것은 완벽한 행사 운영이라는 것을 알고 있습니다. 각 테이블의 위치, 하객들의 이동 경로, 그리고 모든 하객이 행사의 주요 순간을 놓치지 않도록 하는 시야 설계까지, 모든 요소가 과학적으로 계산되고 최적화됩니다.
+                </p>
+                <ul class="services-list" style="margin-top: 30px;">
+                    <li>테이블 배치 시뮬레이션 제공</li>
+                    <li>좌석 수 / 동선 / 시야 사전 설계</li>
+                    <li>레이아웃 Mock-up & 촬영 자료 제공</li>
+                    <li>행사 목적에 맞는 공간 변형</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="detail-section reverse">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/11.jpg" alt="Wedding Dining" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">02.3</div>
+                <h2 class="detail-sub-title">음식이 웨딩의 격을 결정한다</h2>
+                <p class="brand-description">
+                    뷔페·한상차림이 아닌 코스 요리 중심의 웨딩 다이닝을 제공합니다. 레스토랑 기반 웨딩 케이터링으로 하객 경험을 '식사'가 아닌 '다이닝'으로 전환합니다. 미쉐린 셰프 협업 가능성을 전면에 내세워 식대의 합리성과 상징성을 동시에 확보합니다. 더브리크 한남은 웨딩에서 음식이 단순히 배를 채우는 것이 아니라, 하객들에게 감동을 주는 중요한 경험 요소임을 이해합니다. 그래서 일반적인 웨딩장 음식이 아닌, 레스토랑 수준의 정교한 코스 요리를 제공합니다.
+                </p>
+                <ul class="services-list" style="margin-top: 30px;">
+                    <li>코스 요리 중심 웨딩 다이닝</li>
+                    <li>레스토랑 기반 케이터링 서비스</li>
+                    <li>미쉐린 셰프 협업 가능</li>
+                    <li>식대의 합리성과 상징성 확보</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03. 쇼케이스 테마 Section -->
+    <section class="detail-section" id="section-03">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/12.jpg" alt="Light Theme" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">03.1</div>
+                <h2 class="detail-sub-title">WHEN LIGHT BEGINS: BEGIN · BRIGHT · BLOOM</h2>
+                <p class="brand-description">
+                    이번 쇼케이스의 테마는 [ WHEN LIGHT BEGINS : BEGIN · BRIGHT · BLOOM ] 으로, "모든 피어남은 하나의 빛에서 시작된다"는 메시지를 중심으로 구성되었습니다. 더브리크 한남 특유의 수직적 공간 구조를 적극적으로 해석하여, 빛이 위에서 아래로 흐르듯 공간 전체를 감싸고 그 빛 아래에서 결혼의 감정이 차분히 시작되고, 밝아지며, 피어나는 과정을 시각적으로 구현합니다. 꽃과 장식보다 빛과 분위기를 중심으로 한 연출로, 사진·영상 결과물이 감각적이고 완성도 높게 나오도록 설계되었습니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="detail-section reverse">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/13.jpg" alt="Narrative Experience" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">03.2</div>
+                <h2 class="detail-sub-title">빛에서 시작되는 서사적 경험</h2>
+                <p class="brand-description">
+                    THE BRIQUE HANNAM Wedding Showcase는 결혼식을 단순한 하루의 이벤트가 아닌, '빛에서 시작되는 하나의 서사적 경험'으로 재정의하는 프로젝트입니다. 본 쇼케이스는 상품 구성이나 가격 중심의 상담회가 아닌, 웨딩 컨셉과 분위기를 먼저 '경험'하게 하는 브랜드 중심형 쇼케이스입니다. 참가자들은 공간에 들어서는 순간부터 빛의 변화를 통해 감정의 여정을 경험하게 됩니다. 이는 단순한 웨딩 쇼케이스를 넘어, 자신의 결혼식이 어떻게 펼쳐질지 상상할 수 있는 몰입형 경험입니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04. 차별화 포인트 Section -->
+    <section class="detail-section" id="section-04">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/14.jpg" alt="Differentiation" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">04.1</div>
+                <h2 class="detail-sub-title">패키지 웨딩과의 명확한 차별화</h2>
+                <p class="brand-description">
+                    가격·옵션 나열형 웨딩 박람회 구조에서 벗어나 컨셉·공간·감정 중심의 브랜딩형 쇼케이스입니다. '선택하는 웨딩'이 아닌 "이 공간에서 결혼하고 싶다"는 감정을 유도합니다. 더브리크 한남의 쇼케이스는 일반적인 웨딩 박람회와는 완전히 다른 접근 방식을 취합니다. 단순히 가격 비교와 옵션 선택을 돕는 것이 아니라, 공간 자체의 매력과 브랜드의 철학을 경험하게 하여, 참가자들이 자연스럽게 이곳에서 결혼식을 하고 싶다는 감정에 도달하도록 설계되었습니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="detail-section reverse">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/15.jpg" alt="Space Specific Content" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">04.2</div>
+                <h2 class="detail-sub-title">공간 특화 웨딩 콘텐츠</h2>
+                <p class="brand-description">
+                    본 쇼케이스는 더브리크 한남 공간에 최적화된 웨딩 컨셉으로, 타 베뉴에 적용 불가능한 구조 기반 연출입니다. "여기서만 가능한 웨딩"이라는 강력한 포지셔닝을 확보하며, 베뉴 자체의 브랜드 가치 상승과 가격 방어력을 강화합니다. 더브리크 한남의 수직적 공간 구조를 활용한 빛의 연출, 층간 연결을 통한 자연스러운 동선 설계, 그리고 공간의 독특한 아키텍처를 최대한 활용한 연출은 다른 곳에서는 절대 경험할 수 없는 독특한 웨딩 경험을 만들어냅니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05. 특별 혜택 Section -->
+    <section class="detail-section" id="section-05">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/16.jpg" alt="Special Benefits" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">05.1</div>
+                <h2 class="detail-sub-title">대관료 30% 할인 · 식대 10% 할인</h2>
+                <p class="brand-description">
+                    웨딩 쇼케이스 참가 고객을 위한 특별 혜택입니다. 대관료 30% 할인과 식대 10% 할인을 통해 호텔 대비 합리적인 가격 구조로 프리미엄 웨딩을 경험하실 수 있습니다. 이 혜택은 형식적인 웨딩이 아닌 '기억에 남는 결혼식'을 원하는 커플을 위한 것입니다. 더브리크 한남은 합리적인 가격으로도 최고의 서비스와 경험을 제공할 수 있다는 것을 보여드립니다. 이 기회를 놓치지 마시고, 평소 경험하기 어려웠던 프리미엄 웨딩을 합리적인 가격에 만나보세요.
+                </p>
+                <ul class="services-list" style="margin-top: 30px;">
+                    <li>대관료 30% 특별 할인</li>
+                    <li>식대 10% 할인 혜택</li>
+                    <li>호텔 대비 합리적 가격 구조</li>
+                    <li>프리미엄 서비스 유지</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="detail-section reverse">
+        <div class="detail-wrapper">
+            <div class="detail-image-wrapper">
+                <img src="images/17.jpg" alt="Premium Gifts" class="detail-image">
+            </div>
+            <div class="detail-content">
+                <div class="detail-sub-number">05.2</div>
+                <h2 class="detail-sub-title">아트디저트 테이블 제공 및 부케 향수 패키지</h2>
+                <p class="brand-description">
+                    아트디저트 테이블(200만원 상당)을 제공하며, 선착순 10팀에게는 180만원 상당의 부케 향수 패키지를 선물합니다. 이는 단순한 부가 혜택이 아니라, 더브리크 한남이 제공하는 프리미엄 경험의 일부입니다. 아트디저트 테이블은 웨딩의 분위기를 한층 더 높이고, 하객들에게 특별한 기억을 선사합니다. 또한 선착순 고객에게 제공되는 부케 향수 패키지는 결혼식의 추억을 오래도록 간직할 수 있게 해주는 특별한 선물입니다.
+                </p>
+                <ul class="services-list" style="margin-top: 30px;">
+                    <li>아트디저트 테이블 제공 (200만원 상당)</li>
+                    <li>선착순 10팀 부케 향수 패키지 (180만원 상당)</li>
+                    <li>플라워 데코레이션 10% 할인</li>
+                    <li>프리미엄 경험의 완성</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="quote">
+            THE BRIQUE HANNAM WEDDING SHOWCASE는<br>
+            계약을 위한 행사가 아니라,<br>
+            브랜드와 공간의 '격'을 체감시키는<br>
+            웨딩 경험 콘텐츠입니다.<br>
+            모든 피어남은 하나의 빛에서 시작됩니다.
+        </div>
+    </section>
+
+
+    <!-- Benefits Section -->
+    <section class="benefits-section" id="benefits">
+        <h2 class="section-heading" style="text-align: center; margin-bottom: 60px;">SHOWCASE 특별 혜택</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-number">30%</div>
+                <div class="benefit-title">대관료 할인</div>
+                <div class="benefit-description">웨딩 쇼케이스 참가 고객 특별 할인</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-number">10%</div>
+                <div class="benefit-title">식대 할인</div>
+                <div class="benefit-description">프리미엄 다이닝 경험 제공</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-number">10%</div>
+                <div class="benefit-title">플라워 데코 할인</div>
+                <div class="benefit-description">아름다운 공간 연출을 위한 특별 혜택</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-number">200만원</div>
+                <div class="benefit-title">아트디저트 테이블</div>
+                <div class="benefit-description">상당 가치의 프리미엄 디저트 제공</div>
+            </div>
+            <div class="benefit-item" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto;">
+                <div class="benefit-number">180만원</div>
+                <div class="benefit-title">부케 향수 패키지</div>
+                <div class="benefit-description">선착순 10팀에게 특별 선물 (180만원 상당)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inquiry Form Section -->
+    <section class="inquiry-section" id="inquiry">
+        <div class="inquiry-container">
+            <h2 class="section-heading" style="text-align: center; margin-bottom: 50px;">SHOWCASE 문의하기</h2>
+            <form class="inquiry-form" id="inquiryForm">
+                <div class="form-group">
+                    <label class="form-label" for="name">신청자 성명</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="성명을 입력해주세요" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="phone">연락처</label>
+                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="연락처를 입력해주세요" required>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="form-section-title">예식 희망 정보</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">예상 예식 날짜</label>
+                        <div class="date-group">
+                            <span class="date-label">1순위</span>
+                            <div class="date-input-wrapper">
+                                <input type="date" id="date1" name="date1" class="form-input" required>
+                            </div>
+                        </div>
+                        <div class="date-group" style="margin-top: 10px;">
+                            <span class="date-label">2순위</span>
+                            <div class="date-input-wrapper">
+                                <input type="date" id="date2" name="date2" class="form-input">
+                            </div>
+                        </div>
+                        <div class="date-group" style="margin-top: 10px;">
+                            <span class="date-label">3순위</span>
+                            <div class="date-input-wrapper">
+                                <input type="date" id="date3" name="date3" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="preferred-time">선호 시간</label>
+                        <input type="text" id="preferred-time" name="preferred-time" class="form-input" placeholder="예: 오후 2시">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="guest-count">예상 하객</label>
+                        <input type="number" id="guest-count" name="guest-count" class="form-input" placeholder="인원수를 입력해주세요" min="1">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="form-section-title">웨딩 예산 계획</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="venue-fee">대관료</label>
+                        <input type="text" id="venue-fee" name="venue-fee" class="form-input" placeholder="예산을 입력해주세요">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="meal-fee">식대(1인)</label>
+                        <input type="text" id="meal-fee" name="meal-fee" class="form-input" placeholder="1인당 예산을 입력해주세요">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="form-section-title">선호 상담 일정</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="consultation-date">상담 희망 날짜</label>
+                        <div class="date-input-wrapper">
+                            <input type="date" id="consultation-date" name="consultation-date" class="form-input" min="2024-01-22" max="2024-01-25" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacy-agree" name="privacy-agree" class="checkbox-input" required>
+                        <label for="privacy-agree" class="checkbox-label">
+                            <strong>개인정보 수집 및 상담 활용 동의</strong><br>
+                            본 상담카드는 상담목적에 한해 활용됩니다. 동의합니다
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="form-submit-button" id="submitButton">신청하기</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2 class="modal-title">신청이 완료되었습니다</h2>
+            <div class="modal-message">
+                <p>선호방문일정은 확정 예약이 아닌 점 참고부탁드리겠습니다.</p>
+                <p>예약일정은 확정을 위해 추후 연락으로 안내드립니다.</p>
+                <p>고객님의 소중한 시간을 담아 주신 만큼, 더욱 정성스럽게 상담도와드리겠습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Date input validation
+        const dateInputs = document.querySelectorAll('input[type="date"]');
+        const consultationDate = document.getElementById('consultation-date');
+        
+        // Set min and max for consultation date (January 22-25, 2024)
+        consultationDate.setAttribute('min', '2024-01-22');
+        consultationDate.setAttribute('max', '2024-01-25');
+
+        // Disable dates outside range for consultation
+        consultationDate.addEventListener('input', function() {
+            const selectedDate = new Date(this.value);
+            const minDate = new Date('2024-01-22');
+            const maxDate = new Date('2024-01-25');
+            
+            if (selectedDate < minDate || selectedDate > maxDate) {
+                alert('상담 일정은 2024년 1월 22일부터 1월 25일까지만 선택 가능합니다.');
+                this.value = '';
+            }
+        });
+
+        // Form submission
+        const form = document.getElementById('inquiryForm');
+        const modal = document.getElementById('successModal');
+        const modalClose = document.getElementById('modalClose');
+        const submitButton = document.getElementById('submitButton');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate privacy agreement
+            const privacyAgree = document.getElementById('privacy-agree');
+            if (!privacyAgree.checked) {
+                alert('개인정보 수집 및 상담 활용에 동의해주세요.');
+                return;
+            }
+
+            // Disable submit button
+            submitButton.disabled = true;
+            submitButton.textContent = '처리 중...';
+
+            // Simulate form submission (replace with actual API call)
+            setTimeout(function() {
+                // Show modal
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                // Reset form
+                form.reset();
+                submitButton.disabled = false;
+                submitButton.textContent = '신청하기';
+            }, 500);
+        });
+
+        // Close modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">THE BRIQUE HANNAM</div>
+                <p class="footer-tagline">WHEN LIGHT BEGINS: BEGIN · BRIGHT · BLOOM<br>프리미엄 웨딩 베뉴</p>
+                <p class="copyright">© THE BRIQUE HANNAM 2024</p>
+            </div>
+            <div>
+                <h3 class="section-heading">CONTACT</h3>
+                <ul class="contact-section">
+                    <li><a href="mailto:wedding@thebriquehannam.com">Email</a></li>
+                    <li><a href="#inquire">상담 문의</a></li>
+                </ul>
+                <h3 class="section-heading" style="margin-top: 40px;">SOCIAL</h3>
+                <ul class="social-section">
+                    <li><a href="#instagram">Instagram</a></li>
+                    <li><a href="#kakao">카카오톡 채널</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <a href="#policies">이용약관</a>
+            <a href="#credits">개인정보처리방침</a>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab-container">
+        <a href="#" class="fab-button phone" id="phoneBtn" aria-label="전화하기">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+        </a>
+        <a href="#top" class="fab-button top" id="topBtn" aria-label="맨 위로">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+            </svg>
+        </a>
+    </div>
+
+    <script>
+        // Top button scroll behavior
+        document.getElementById('topBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Phone button click handler
+        document.getElementById('phoneBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            // 전화번호를 여기에 입력하세요
+            window.location.href = 'tel:02-1234-5678';
+        });
+
+        // Show/hide top button based on scroll position
+        let topButton = document.getElementById('topBtn');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                topButton.style.opacity = '1';
+                topButton.style.pointerEvents = 'auto';
+            } else {
+                topButton.style.opacity = '0.7';
+                topButton.style.pointerEvents = 'auto';
+            }
+        });
+
+        // Initial state
+        topButton.style.opacity = '0.7';
+
+        // Menu Button & Sidebar
+        const menuButton = document.getElementById('menuButton');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+
+        // Menu toggle function
+        function toggleMenu() {
+            menuButton.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Menu button click
+        menuButton.addEventListener('click', toggleMenu);
+
+        // Overlay click to close
+        sidebarOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on a link
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    toggleMenu();
+                    setTimeout(() => {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 300);
+                }
+            });
+        });
+
+        // Menu button color change on scroll
+        let scrollHandler = function() {
+            if (window.pageYOffset > 100) {
+                menuButton.classList.add('scrolled');
+            } else {
+                menuButton.classList.remove('scrolled');
+            }
+        };
+        
+        window.addEventListener('scroll', scrollHandler);
+        
+        // Initial check
+        scrollHandler();
+
+        // Close menu on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    </script>
+</body>
+</html>
