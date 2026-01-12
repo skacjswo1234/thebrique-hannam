@@ -32,8 +32,8 @@
             z-index: 10000;
             width: 50px;
             height: 50px;
-            background-color: white;
-            border: 2px solid #1a1a1a;
+            background-color: transparent;
+            border: none;
             display: flex !important;
             flex-direction: column;
             align-items: center;
@@ -45,7 +45,6 @@
         }
 
         .menu-button:hover {
-            background-color: #f5f1eb;
             transform: scale(1.05);
         }
 
@@ -66,7 +65,7 @@
             font-size: 0.65rem;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: #1a1a1a;
+            color: white;
             font-weight: 600;
             margin-top: 2px;
             transition: color 0.3s ease;
@@ -79,7 +78,7 @@
         .menu-line {
             width: 20px;
             height: 2px;
-            background-color: #1a1a1a;
+            background-color: white;
             transition: all 0.3s ease;
         }
 
@@ -147,6 +146,51 @@
 
         .sidebar-content {
             padding: 80px 40px 40px;
+            position: relative;
+        }
+
+        .sidebar-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: 2px solid #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .sidebar-close:hover {
+            background-color: #1a1a1a;
+            transform: rotate(90deg);
+        }
+
+        .sidebar-close::before,
+        .sidebar-close::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background-color: #1a1a1a;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar-close::before {
+            transform: rotate(45deg);
+        }
+
+        .sidebar-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .sidebar-close:hover::before,
+        .sidebar-close:hover::after {
+            background-color: white;
         }
 
         .sidebar-menu {
@@ -225,10 +269,51 @@
                 padding: 60px 30px 30px;
             }
 
+            .sidebar-close {
+                top: 20px;
+                right: 20px;
+                width: 36px;
+                height: 36px;
+            }
+
+            .sidebar-close::before,
+            .sidebar-close::after {
+                width: 18px;
+            }
+
             .sidebar-menu a {
                 font-size: 0.9rem;
                 padding: 6px 0;
                 padding-left: 25px;
+            }
+
+            .location-section {
+                padding: 80px 30px !important;
+            }
+
+            .location-content {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 40px !important;
+            }
+
+            .location-image-wrapper {
+                width: 100% !important;
+                order: 1 !important;
+            }
+
+            .location-info {
+                order: 2 !important;
+                width: 100% !important;
+            }
+
+            .location-title {
+                font-size: 1.2rem !important;
+                margin-bottom: 40px !important;
+            }
+
+            .location-image {
+                width: 100% !important;
             }
         }
 
@@ -568,6 +653,8 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 2;
             font-weight: 400;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .cta-button:hover {
@@ -575,6 +662,8 @@
             border-color: white;
             transform: translateX(-50%) translateY(-3px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-decoration: none;
+            color: white;
         }
 
         /* Table of Contents Section - Trendy */
@@ -1710,6 +1799,81 @@
             text-decoration: underline;
         }
 
+        /* Location Section */
+        .location-section {
+            padding: 120px 60px;
+            background-color: #f5f1eb;
+            border: 2px solid #1a1a1a;
+            margin: -2px 0;
+        }
+
+        .location-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .location-title {
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            margin-bottom: 50px;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 20px;
+        }
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .location-image-wrapper {
+            width: 100%;
+        }
+
+        .location-image {
+            width: 100%;
+            height: auto;
+            border: 1px solid #1a1a1a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .location-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .location-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .location-label {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .location-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
+        }
+
+        .location-text strong {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
         /* Floating Action Buttons */
         .fab-container {
             position: fixed;
@@ -2156,6 +2320,7 @@
     <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-content">
+            <button class="sidebar-close" id="sidebarClose" aria-label="메뉴 닫기"></button>
             <ul class="sidebar-menu">
                 <li><a href="#hero">THE BRIQUE HANNAM</a></li>
                 <li><a href="#hero-intro">SHOWCASE 소개</a></li>
@@ -2204,7 +2369,7 @@
             <span class="brand-name">THE BRIQUE HANNAM</span>
             <span class="showcase-title">Wedding Showcase</span>
         </div>
-        <button class="cta-button">SHOWCASE 예약하기</button>
+        <a href="#inquiry" class="cta-button">SHOWCASE 예약하기</a>
     </section>
 
     <!-- Hero Intro Section -->
@@ -2708,7 +2873,7 @@
                     <div class="form-group">
                         <label class="form-label" for="consultation-date">상담 희망 날짜</label>
                         <div class="date-input-wrapper">
-                            <input type="date" id="consultation-date" name="consultation-date" class="form-input" min="2024-01-22" max="2024-01-25" required>
+                            <input type="date" id="consultation-date" name="consultation-date" class="form-input" min="2026-01-22" max="2026-01-25" required>
                         </div>
                     </div>
                 </div>
@@ -2746,18 +2911,18 @@
         const dateInputs = document.querySelectorAll('input[type="date"]');
         const consultationDate = document.getElementById('consultation-date');
         
-        // Set min and max for consultation date (January 22-25, 2024)
-        consultationDate.setAttribute('min', '2024-01-22');
-        consultationDate.setAttribute('max', '2024-01-25');
+        // Set min and max for consultation date (January 22-25, 2026)
+        consultationDate.setAttribute('min', '2026-01-22');
+        consultationDate.setAttribute('max', '2026-01-25');
 
         // Disable dates outside range for consultation
         consultationDate.addEventListener('input', function() {
             const selectedDate = new Date(this.value);
-            const minDate = new Date('2024-01-22');
-            const maxDate = new Date('2024-01-25');
+            const minDate = new Date('2026-01-22');
+            const maxDate = new Date('2026-01-25');
             
             if (selectedDate < minDate || selectedDate > maxDate) {
-                alert('상담 일정은 2024년 1월 22일부터 1월 25일까지만 선택 가능합니다.');
+                alert('상담 일정은 2026년 1월 22일부터 1월 25일까지만 선택 가능합니다.');
                 this.value = '';
             }
         });
@@ -2815,7 +2980,47 @@
                 closeModal();
             }
         });
+
+        // Sidebar close button
+        const sidebarClose = document.getElementById('sidebarClose');
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', toggleMenu);
+        }
     </script>
+
+    <!-- Location Section -->
+    <section class="location-section" id="location">
+        <div class="location-container">
+            <h2 class="location-title">오시는길</h2>
+            <div class="location-content">
+                <div class="location-image-wrapper">
+                    <img src="images/map.png" alt="오시는길 지도" class="location-image">
+                </div>
+                <div class="location-info">
+                    <div class="location-item">
+                        <div class="location-label">위치</div>
+                        <div class="location-text">
+                            <strong>코엑스마곡 전시장 1F</strong>
+                        </div>
+                    </div>
+                    <div class="location-item">
+                        <div class="location-label">지하철</div>
+                        <div class="location-text">
+                            <strong>9호선 마곡나루역 2번 출구</strong><br>
+                            마곡광장 지하도로 이용
+                        </div>
+                    </div>
+                    <div class="location-item">
+                        <div class="location-label">주소</div>
+                        <div class="location-text">
+                            서울특별시 강서구 마곡동 767<br>
+                            (마곡동 코엑스 마곡 르웨스트) 157210
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
