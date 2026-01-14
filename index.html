@@ -5,6 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE BRIQUE HANNAM | Wedding Showcase</title>
     <style>
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('font/Paperlogy-1Thin.ttf') format('truetype');
+            font-weight: 100;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('font/Paperlogy-2ExtraLight.ttf') format('truetype');
+            font-weight: 200;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('font/Paperlogy-3Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('font/Paperlogy-4Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('font/Paperlogy-5Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('font/Paperlogy-6SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('font/Paperlogy-7Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('font/Paperlogy-8ExtraBold.ttf') format('truetype');
+            font-weight: 800;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('font/Paperlogy-9Black.ttf') format('truetype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,7 +67,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Paperlogy', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             color: #333;
             line-height: 1.6;
             background-color: #f5f1eb;
@@ -634,6 +689,9 @@
             color: #333;
             letter-spacing: 0.5px;
             font-weight: 400;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .cta-button {
@@ -655,6 +713,7 @@
             font-weight: 400;
             text-decoration: none;
             display: inline-block;
+            text-align: center;
         }
 
         .cta-button:hover {
@@ -953,11 +1012,15 @@
             }
 
             .hero-intro-text {
-                font-size: 15px !important;
-                line-height: 1.8 !important;
-                letter-spacing: 0.3px;
+                font-size: 14px !important;
+                line-height: 2 !important;
+                letter-spacing: 0.5px;
                 text-align: left;
-                padding: 0 10px;
+                padding: 0 20px;
+                text-indent: 1.5em;
+                word-break: keep-all;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             }
 
             /* Mobile Detail Sections - Improved Layout */
@@ -1007,8 +1070,13 @@
 
             .detail-section .brand-description {
                 font-size: 14px !important;
-                line-height: 1.7 !important;
+                line-height: 1.8 !important;
                 margin-bottom: 25px !important;
+                word-break: keep-all;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                text-indent: 1em;
+                padding-left: 0.5em;
             }
 
             .services-list,
@@ -1046,8 +1114,11 @@
 
             .brand-description {
                 font-size: 14px !important;
-                line-height: 1.7 !important;
+                line-height: 1.8 !important;
                 margin-bottom: 30px !important;
+                word-break: keep-all;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             }
 
             .small-image {
@@ -2064,7 +2135,15 @@
             .benefit-description {
                 font-size: 14px !important;
                 font-weight: 400 !important;
-                line-height: 1.65 !important;
+                line-height: 1.8 !important;
+                word-break: keep-all;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .detail-section .brand-description {
+                text-indent: 1em;
+                padding-left: 0.5em;
             }
 
             /* Mobile Bullet/Highlight Text */
@@ -2133,13 +2212,11 @@
             .contents-sub-item {
                 flex-direction: column;
                 align-items: flex-start;
-                padding-left: 30px;
+                padding-left: 0 !important;
             }
 
             .contents-page-number {
-                margin-top: 5px;
-                text-align: left;
-                min-width: auto;
+                display: none !important;
             }
 
             .contents-footer {
@@ -2222,7 +2299,10 @@
 
             .contents-sub-title {
                 font-size: 13px !important;
-                line-height: 1.5 !important;
+                line-height: 1.6 !important;
+                word-break: keep-all;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             }
 
             .contents-main-section {
@@ -2236,7 +2316,12 @@
 
             .contents-sub-item {
                 margin-bottom: 12px !important;
-                padding: 10px 0 10px 40px !important;
+                padding: 10px 0 10px 15px !important;
+            }
+            
+            .contents-sub-item .contents-sub-title {
+                text-indent: -0.5em;
+                padding-left: 0.5em;
             }
 
             /* Mobile Quote Section - Improved */
@@ -2326,10 +2411,9 @@
                 <li><a href="#hero-intro">SHOWCASE 소개</a></li>
                 <li><a href="#contents">SHOWCASE OVERVIEW</a></li>
                 <li><a href="#section-01">THE BRIQUE HANNAM</a></li>
-                <li><a href="#section-02">핵심 마케팅 메시지</a></li>
-                <li><a href="#section-03">쇼케이스 테마</a></li>
-                <li><a href="#section-04">차별화 포인트</a></li>
-                <li><a href="#section-05">특별 혜택</a></li>
+                <li><a href="#section-02">쇼케이스 테마</a></li>
+                <li><a href="#section-03">차별화 포인트</a></li>
+                <li><a href="#section-04">특별 혜택</a></li>
                 <li><a href="#benefits">혜택 안내</a></li>
                 <li><a href="#inquiry">문의하기</a></li>
             </ul>
@@ -2400,7 +2484,7 @@
                         <div class="contents-sub-info">
                             <span class="contents-sub-number">01.1</span>
                             <span class="contents-sub-separator">/</span>
-                            <span class="contents-sub-title">하우스 웨딩의 자유로움과 호텔 웨딩의 서비스</span>
+                            <span class="contents-sub-title">하우스 웨딩의 자유로움과 <br>호텔 웨딩의 서비스</span>
                         </div>
                         <span class="contents-page-number">03</span>
                     </div>
@@ -2408,7 +2492,7 @@
                         <div class="contents-sub-info">
                             <span class="contents-sub-number">01.2</span>
                             <span class="contents-sub-separator">/</span>
-                            <span class="contents-sub-title">행사 전용 설계 공간에서의 완성된 웨딩</span>
+                            <span class="contents-sub-title">행사 전용 설계 공간에서의<br> 완성된 웨딩</span>
                         </div>
                         <span class="contents-page-number">05</span>
                     </div>
@@ -2427,7 +2511,7 @@
                 <div class="contents-main-section">
                     <div class="contents-main-info">
                         <div class="contents-main-number">02</div>
-                        <div class="contents-main-title">핵심 마케팅 메시지</div>
+                        <div class="contents-main-title">쇼케이스 테마</div>
                     </div>
                 </div>
                 <div class="contents-sub-items">
@@ -2435,48 +2519,13 @@
                         <div class="contents-sub-info">
                             <span class="contents-sub-number">02.1</span>
                             <span class="contents-sub-separator">/</span>
-                            <span class="contents-sub-title">하우스 웨딩이지만 허술하지 않다</span>
-                        </div>
-                        <span class="contents-page-number">11</span>
-                    </div>
-                    <div class="contents-sub-item">
-                        <div class="contents-sub-info">
-                            <span class="contents-sub-number">02.2</span>
-                            <span class="contents-sub-separator">/</span>
-                            <span class="contents-sub-title">공간이 아니라 행사 완성도를 판다</span>
-                        </div>
-                        <span class="contents-page-number">14</span>
-                    </div>
-                    <div class="contents-sub-item">
-                        <div class="contents-sub-info">
-                            <span class="contents-sub-number">02.3</span>
-                            <span class="contents-sub-separator">/</span>
-                            <span class="contents-sub-title">음식이 웨딩의 격을 결정한다</span>
-                        </div>
-                        <span class="contents-page-number">16</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="contents-section-item">
-                <div class="contents-main-section">
-                    <div class="contents-main-info">
-                        <div class="contents-main-number">03</div>
-                        <div class="contents-main-title">쇼케이스 테마</div>
-                    </div>
-                </div>
-                <div class="contents-sub-items">
-                    <div class="contents-sub-item">
-                        <div class="contents-sub-info">
-                            <span class="contents-sub-number">03.1</span>
-                            <span class="contents-sub-separator">/</span>
                             <span class="contents-sub-title">WHEN LIGHT BEGINS: BEGIN · BRIGHT · BLOOM</span>
                         </div>
                         <span class="contents-page-number">19</span>
                     </div>
                     <div class="contents-sub-item">
                         <div class="contents-sub-info">
-                            <span class="contents-sub-number">03.2</span>
+                            <span class="contents-sub-number">02.2</span>
                             <span class="contents-sub-separator">/</span>
                             <span class="contents-sub-title">빛에서 시작되는 서사적 경험</span>
                         </div>
@@ -2488,14 +2537,14 @@
             <div class="contents-section-item">
                 <div class="contents-main-section">
                     <div class="contents-main-info">
-                        <div class="contents-main-number">04</div>
+                        <div class="contents-main-number">03</div>
                         <div class="contents-main-title">차별화 포인트</div>
                     </div>
                 </div>
                 <div class="contents-sub-items">
                     <div class="contents-sub-item">
                         <div class="contents-sub-info">
-                            <span class="contents-sub-number">04.1</span>
+                            <span class="contents-sub-number">03.1</span>
                             <span class="contents-sub-separator">/</span>
                             <span class="contents-sub-title">패키지 웨딩과의 명확한 차별화</span>
                         </div>
@@ -2503,7 +2552,7 @@
                     </div>
                     <div class="contents-sub-item">
                         <div class="contents-sub-info">
-                            <span class="contents-sub-number">04.2</span>
+                            <span class="contents-sub-number">03.2</span>
                             <span class="contents-sub-separator">/</span>
                             <span class="contents-sub-title">공간 특화 웨딩 콘텐츠</span>
                         </div>
@@ -2515,14 +2564,14 @@
             <div class="contents-section-item">
                 <div class="contents-main-section">
                     <div class="contents-main-info">
-                        <div class="contents-main-number">05</div>
+                        <div class="contents-main-number">04</div>
                         <div class="contents-main-title">특별 혜택</div>
                     </div>
                 </div>
                 <div class="contents-sub-items">
                     <div class="contents-sub-item">
                         <div class="contents-sub-info">
-                            <span class="contents-sub-number">05.1</span>
+                            <span class="contents-sub-number">04.1</span>
                             <span class="contents-sub-separator">/</span>
                             <span class="contents-sub-title">대관료 30% 할인 · 식대 10% 할인</span>
                         </div>
@@ -2530,16 +2579,16 @@
                     </div>
                     <div class="contents-sub-item">
                         <div class="contents-sub-info">
-                            <span class="contents-sub-number">05.2</span>
+                            <span class="contents-sub-number">04.2</span>
                             <span class="contents-sub-separator">/</span>
-                            <span class="contents-sub-title">아트디저트 테이블 제공 및 부케 향수 패키지</span>
+                            <span class="contents-sub-title">아트디저트 테이블 제공<br> 및 부케 향수 패키지</span>
                         </div>
                         <span class="contents-page-number">35</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="contents-footer">01</div>
+       
     </section>
 
     <!-- 01. THE BRIQUE HANNAM Section -->
@@ -2588,78 +2637,14 @@
         </div>
     </section>
 
-    <!-- 02. 핵심 마케팅 메시지 Section -->
-    <section class="detail-section reverse" id="section-02">
-        <div class="detail-wrapper">
-            <div class="detail-image-wrapper">
-                <img src="images/9.jpg" alt="Premium Service" class="detail-image">
-            </div>
-            <div class="detail-content">
-                <div class="detail-sub-number">02.1</div>
-                <h2 class="detail-sub-title">하우스 웨딩이지만 허술하지 않다</h2>
-                <p class="brand-description">
-                    더브리크 한남은 하우스 웨딩의 자유로움과 호텔 웨딩의 전문성을 결합한 프리미엄 웨딩 베뉴입니다. 일반적인 하우스 웨딩의 편안함을 유지하면서도, 호텔 웨딩과 동일한 서비스 기준으로 운영됩니다. 전문 DOS(Director of Sales)와 RM(Reservation Manager) 체계를 갖추고, 상담–운영–사후관리까지 분리된 전문 구조로 진행됩니다. 이번 쇼케이스에서는 이러한 서비스 체계의 차별성을 직접 경험하실 수 있으며, 하우스 웨딩의 자유로움과 호텔 웨딩의 완벽함이 어떻게 결합되는지 체감하실 수 있습니다.
-                </p>
-                <ul class="services-list" style="margin-top: 30px;">
-                    <li>호텔 웨딩과 동일한 서비스 기준 운영</li>
-                    <li>전문 DOS(Director of Sales) 체계</li>
-                    <li>RM(Reservation Manager) 전담 관리</li>
-                    <li>상담–운영–사후관리 분리 운영</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="detail-section">
-        <div class="detail-wrapper">
-            <div class="detail-image-wrapper">
-                <img src="images/10.jpg" alt="Event Perfection" class="detail-image">
-            </div>
-            <div class="detail-content">
-                <div class="detail-sub-number">02.2</div>
-                <h2 class="detail-sub-title">공간이 아니라 행사 완성도를 판다</h2>
-                <p class="brand-description">
-                    더브리크 한남은 단순히 아름다운 공간을 제공하는 것이 아니라, 완벽한 행사 운영을 위한 과학적 설계를 제공합니다. 테이블 배치 시뮬레이션을 통해 좌석 수, 동선, 시야를 사전에 설계하며, 실제 상담에 활용 가능한 레이아웃 Mock-up과 촬영 자료를 제공합니다. 이번 쇼케이스에서는 이러한 행사 완성도 설계 프로세스를 직접 경험하실 수 있으며, 웨딩 행사 목적에 맞게 공간이 어떻게 유연하게 변형되는지 확인하실 수 있습니다. 모든 하객이 행사의 주요 순간을 놓치지 않도록 하는 시야 설계까지, 모든 요소가 최적화된 행사 운영의 차별성을 체감하실 수 있습니다.
-                </p>
-                <ul class="services-list" style="margin-top: 30px;">
-                    <li>테이블 배치 시뮬레이션 제공</li>
-                    <li>좌석 수 / 동선 / 시야 사전 설계</li>
-                    <li>레이아웃 Mock-up & 촬영 자료 제공</li>
-                    <li>행사 목적에 맞는 공간 변형</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="detail-section reverse">
-        <div class="detail-wrapper">
-            <div class="detail-image-wrapper">
-                <img src="images/11.jpg" alt="Wedding Dining" class="detail-image">
-            </div>
-            <div class="detail-content">
-                <div class="detail-sub-number">02.3</div>
-                <h2 class="detail-sub-title">음식이 웨딩의 격을 결정한다</h2>
-                <p class="brand-description">
-                    더브리크 한남은 뷔페나 한상차림이 아닌 코스 요리 중심의 웨딩 다이닝을 제공합니다. 레스토랑 기반 웨딩 케이터링으로 하객 경험을 '식사'가 아닌 '다이닝'으로 전환하며, 미쉐린 셰프 협업 가능성을 통해 식대의 합리성과 상징성을 동시에 확보합니다. 이번 쇼케이스에서는 이러한 프리미엄 다이닝 경험의 차별성을 직접 체감하실 수 있습니다. 일반적인 웨딩장 음식이 아닌, 레스토랑 수준의 정교한 코스 요리가 웨딩의 격을 어떻게 결정하는지 경험하실 수 있습니다. 음식이 단순히 배를 채우는 것이 아니라, 하객들에게 감동을 주는 중요한 경험 요소임을 확인하실 수 있습니다.
-                </p>
-                <ul class="services-list" style="margin-top: 30px;">
-                    <li>코스 요리 중심 웨딩 다이닝</li>
-                    <li>레스토랑 기반 케이터링 서비스</li>
-                    <li>미쉐린 셰프 협업 가능</li>
-                    <li>식대의 합리성과 상징성 확보</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- 03. 쇼케이스 테마 Section -->
-    <section class="detail-section" id="section-03">
+    <!-- 02. 쇼케이스 테마 Section -->
+    <section class="detail-section" id="section-02">
         <div class="detail-wrapper">
             <div class="detail-image-wrapper">
                 <img src="images/12.jpg" alt="Light Theme" class="detail-image">
             </div>
             <div class="detail-content">
-                <div class="detail-sub-number">03.1</div>
+                <div class="detail-sub-number">02.1</div>
                 <h2 class="detail-sub-title">WHEN LIGHT BEGINS: BEGIN · BRIGHT · BLOOM</h2>
                 <p class="brand-description">
                     이번 쇼케이스의 테마는 [ WHEN LIGHT BEGINS : BEGIN · BRIGHT · BLOOM ] 으로, "모든 피어남은 하나의 빛에서 시작된다"는 메시지를 중심으로 구성되었습니다. 더브리크 한남 특유의 수직적 공간 구조를 적극적으로 해석하여, 빛이 위에서 아래로 흐르듯 공간 전체를 감싸고 그 빛 아래에서 결혼의 감정이 차분히 시작되고, 밝아지며, 피어나는 과정을 시각적으로 구현합니다. 꽃과 장식보다 빛과 분위기를 중심으로 한 연출로, 사진·영상 결과물이 감각적이고 완성도 높게 나오도록 설계되었습니다.
@@ -2674,7 +2659,7 @@
                 <img src="images/13.jpg" alt="Narrative Experience" class="detail-image">
             </div>
             <div class="detail-content">
-                <div class="detail-sub-number">03.2</div>
+                <div class="detail-sub-number">02.2</div>
                 <h2 class="detail-sub-title">빛에서 시작되는 서사적 경험</h2>
                 <p class="brand-description">
                     THE BRIQUE HANNAM Wedding Showcase는 결혼식을 단순한 하루의 이벤트가 아닌, '빛에서 시작되는 하나의 서사적 경험'으로 재정의하는 프로젝트입니다. 본 쇼케이스는 상품 구성이나 가격 중심의 상담회가 아닌, 웨딩 컨셉과 분위기를 먼저 '경험'하게 하는 브랜드 중심형 쇼케이스입니다. 참가자들은 공간에 들어서는 순간부터 빛의 변화를 통해 감정의 여정을 경험하게 됩니다. 이는 단순한 웨딩 쇼케이스를 넘어, 자신의 결혼식이 어떻게 펼쳐질지 상상할 수 있는 몰입형 경험입니다.
@@ -2683,14 +2668,14 @@
         </div>
     </section>
 
-    <!-- 04. 차별화 포인트 Section -->
-    <section class="detail-section" id="section-04">
+    <!-- 03. 차별화 포인트 Section -->
+    <section class="detail-section" id="section-03">
         <div class="detail-wrapper">
             <div class="detail-image-wrapper">
                 <img src="images/14.jpg" alt="Differentiation" class="detail-image">
             </div>
             <div class="detail-content">
-                <div class="detail-sub-number">04.1</div>
+                <div class="detail-sub-number">03.1</div>
                 <h2 class="detail-sub-title">패키지 웨딩과의 명확한 차별화</h2>
                 <p class="brand-description">
                     가격·옵션 나열형 웨딩 박람회 구조에서 벗어나 컨셉·공간·감정 중심의 브랜딩형 쇼케이스입니다. '선택하는 웨딩'이 아닌 "이 공간에서 결혼하고 싶다"는 감정을 유도합니다. 더브리크 한남의 쇼케이스는 일반적인 웨딩 박람회와는 완전히 다른 접근 방식을 취합니다. 단순히 가격 비교와 옵션 선택을 돕는 것이 아니라, 공간 자체의 매력과 브랜드의 철학을 경험하게 하여, 참가자들이 자연스럽게 이곳에서 결혼식을 하고 싶다는 감정에 도달하도록 설계되었습니다.
@@ -2705,7 +2690,7 @@
                 <img src="images/15.jpg" alt="Space Specific Content" class="detail-image">
             </div>
             <div class="detail-content">
-                <div class="detail-sub-number">04.2</div>
+                <div class="detail-sub-number">03.2</div>
                 <h2 class="detail-sub-title">공간 특화 웨딩 콘텐츠</h2>
                 <p class="brand-description">
                     본 쇼케이스는 더브리크 한남 공간에 최적화된 웨딩 컨셉으로, 타 베뉴에 적용 불가능한 구조 기반 연출입니다. "여기서만 가능한 웨딩"이라는 강력한 포지셔닝을 확보하며, 베뉴 자체의 브랜드 가치 상승과 가격 방어력을 강화합니다. 더브리크 한남의 수직적 공간 구조를 활용한 빛의 연출, 층간 연결을 통한 자연스러운 동선 설계, 그리고 공간의 독특한 아키텍처를 최대한 활용한 연출은 다른 곳에서는 절대 경험할 수 없는 독특한 웨딩 경험을 만들어냅니다.
@@ -2714,15 +2699,15 @@
         </div>
     </section>
 
-    <!-- 05. 특별 혜택 Section -->
-    <section class="detail-section" id="section-05">
+    <!-- 04. 특별 혜택 Section -->
+    <section class="detail-section" id="section-04">
         <div class="detail-wrapper">
             <div class="detail-image-wrapper">
                 <img src="images/16.jpg" alt="Special Benefits" class="detail-image">
             </div>
             <div class="detail-content">
-                <div class="detail-sub-number">05.1</div>
-                <h2 class="detail-sub-title">대관료 30% 할인 · 식대 10% 할인</h2>
+                <div class="detail-sub-number">04.1</div>
+                <h2 class="detail-sub-title">대관료 30% 할인 <br>식대 10% 할인</h2>
                 <p class="brand-description">
                     웨딩 쇼케이스 참가 고객을 위한 특별 혜택입니다. 대관료 30% 할인과 식대 10% 할인을 통해 호텔 대비 합리적인 가격 구조로 프리미엄 웨딩을 경험하실 수 있습니다. 이 혜택은 형식적인 웨딩이 아닌 '기억에 남는 결혼식'을 원하는 커플을 위한 것입니다. 더브리크 한남은 합리적인 가격으로도 최고의 서비스와 경험을 제공할 수 있다는 것을 보여드립니다. 이 기회를 놓치지 마시고, 평소 경험하기 어려웠던 프리미엄 웨딩을 합리적인 가격에 만나보세요.
                 </p>
@@ -2742,14 +2727,14 @@
                 <img src="images/17.jpg" alt="Premium Gifts" class="detail-image">
             </div>
             <div class="detail-content">
-                <div class="detail-sub-number">05.2</div>
+                <div class="detail-sub-number">04.2</div>
                 <h2 class="detail-sub-title">아트디저트 테이블 제공 및 부케 향수 패키지</h2>
                 <p class="brand-description">
                     아트디저트 테이블(200만원 상당)을 제공하며, 선착순 10팀에게는 180만원 상당의 부케 향수 패키지를 선물합니다. 이는 단순한 부가 혜택이 아니라, 더브리크 한남이 제공하는 프리미엄 경험의 일부입니다. 아트디저트 테이블은 웨딩의 분위기를 한층 더 높이고, 하객들에게 특별한 기억을 선사합니다. 또한 선착순 고객에게 제공되는 부케 향수 패키지는 결혼식의 추억을 오래도록 간직할 수 있게 해주는 특별한 선물입니다.
                 </p>
                 <ul class="services-list" style="margin-top: 30px;">
                     <li>아트디저트 테이블 제공 (200만원 상당)</li>
-                    <li>선착순 10팀 부케 향수 패키지 (180만원 상당)</li>
+                    <li>선착순10팀 부케 향수 패키지(180만원 상당)</li>
                     <li>플라워 데코레이션 10% 할인</li>
                     <li>프리미엄 경험의 완성</li>
                 </ul>
@@ -2765,7 +2750,7 @@
             계약을 위한 행사가 아니라,<br>
             브랜드와 공간의 '격'을 체감시키는<br>
             웨딩 경험 콘텐츠입니다.<br>
-            모든 피어남은 하나의 빛에서 시작됩니다.
+            모든 피어남은 하나의 빛에서<br> 시작됩니다.
         </div>
     </section>
 
@@ -2797,7 +2782,7 @@
             <div class="benefit-item" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto;">
                 <div class="benefit-number">180만원</div>
                 <div class="benefit-title">부케 향수 패키지</div>
-                <div class="benefit-description">선착순 10팀에게 특별 선물 (180만원 상당)</div>
+                <div class="benefit-description">선착순 10팀에게 특별 선물<br> (180만원 상당)</div>
             </div>
         </div>
     </section>
@@ -2805,7 +2790,7 @@
     <!-- Inquiry Form Section -->
     <section class="inquiry-section" id="inquiry">
         <div class="inquiry-container">
-            <h2 class="section-heading" style="text-align: center; margin-bottom: 50px;">SHOWCASE 문의하기</h2>
+            <h2 class="section-heading" style="text-align: center; margin-bottom: 50px;">SHOWCASE<br> 문의하기</h2>
             <form class="inquiry-form" id="inquiryForm">
                 <div class="form-group">
                     <label class="form-label" for="name">신청자 성명</label>
