@@ -76,6 +76,12 @@
 
         html {
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        body {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: none;
         }
 
         /* Menu Button & Sidebar */
@@ -97,6 +103,9 @@
             transition: all 0.3s ease;
             gap: 3px;
             padding: 8px;
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .menu-button:hover {
@@ -1968,6 +1977,9 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .fab-button {
@@ -3092,17 +3104,24 @@
             window.location.href = 'tel:02-1234-5678';
         });
 
-        // Show/hide top button based on scroll position
+        // Show/hide top button based on scroll position (throttled for performance)
+        let topButtonTicking = false;
         let topButton = document.getElementById('topBtn');
         window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                topButton.style.opacity = '1';
-                topButton.style.pointerEvents = 'auto';
-            } else {
-                topButton.style.opacity = '0.7';
-                topButton.style.pointerEvents = 'auto';
+            if (!topButtonTicking) {
+                window.requestAnimationFrame(function() {
+                    if (window.pageYOffset > 300) {
+                        topButton.style.opacity = '1';
+                        topButton.style.pointerEvents = 'auto';
+                    } else {
+                        topButton.style.opacity = '0.7';
+                        topButton.style.pointerEvents = 'auto';
+                    }
+                    topButtonTicking = false;
+                });
+                topButtonTicking = true;
             }
-        });
+        }, { passive: true });
 
         // Initial state
         topButton.style.opacity = '0.7';
@@ -3156,16 +3175,23 @@
             });
         });
 
-        // Menu button color change on scroll
+        // Menu button color change on scroll (throttled for performance)
+        let ticking = false;
         let scrollHandler = function() {
-            if (window.pageYOffset > 100) {
-                menuButton.classList.add('scrolled');
-            } else {
-                menuButton.classList.remove('scrolled');
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    if (window.pageYOffset > 100) {
+                        menuButton.classList.add('scrolled');
+                    } else {
+                        menuButton.classList.remove('scrolled');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
         };
         
-        window.addEventListener('scroll', scrollHandler);
+        window.addEventListener('scroll', scrollHandler, { passive: true });
         
         // Initial check
         scrollHandler();
