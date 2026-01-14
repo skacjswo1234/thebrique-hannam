@@ -169,7 +169,7 @@
             max-width: 85vw;
             height: 100vh;
             background-color: white;
-            z-index: 9999;
+            z-index: 10001;
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
             border-left: 2px solid #1a1a1a;
@@ -188,7 +188,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9998;
+            z-index: 10000;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -217,7 +217,8 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            z-index: 10;
+            z-index: 10002;
+            pointer-events: auto;
         }
 
         .sidebar-close:hover {
@@ -300,6 +301,19 @@
                 height: 48px;
                 gap: 4px;
                 padding: 8px;
+            }
+            
+            .sidebar.active ~ .menu-button,
+            body:has(.sidebar.active) .menu-button {
+                z-index: 10000 !important;
+            }
+            
+            .sidebar {
+                z-index: 10001 !important;
+            }
+            
+            .sidebar-overlay {
+                z-index: 10000 !important;
             }
 
             .menu-button-text {
@@ -1086,7 +1100,7 @@
 
             .services-list li,
             .interests-list li {
-                font-size: 14px !important;
+                font-size: 12px !important;
                 font-weight: 500 !important;
                 line-height: 1.6 !important;
                 padding: 6px 0 !important;
@@ -1251,7 +1265,7 @@
 
         .services-list li {
             padding: 8px 0;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #333;
         }
 
@@ -2149,7 +2163,7 @@
             /* Mobile Bullet/Highlight Text */
             .services-list li,
             .interests-list li {
-                font-size: 15px !important;
+                font-size: 13px !important;
                 font-weight: 500 !important;
                 line-height: 1.6 !important;
             }
@@ -2254,6 +2268,31 @@
 
             .date-label {
                 margin-bottom: 5px;
+            }
+            
+            .date-input-wrapper {
+                position: relative;
+            }
+            
+            .date-input-wrapper input[type="date"] {
+                padding-right: 45px !important;
+                width: 100%;
+            }
+            
+            .date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+                position: absolute;
+                right: 12px;
+                width: 24px;
+                height: 24px;
+                cursor: pointer;
+                opacity: 1;
+                z-index: 1;
+            }
+            
+            .date-input-wrapper input[type="date"]::-webkit-inner-spin-button,
+            .date-input-wrapper input[type="date"]::-webkit-clear-button {
+                display: block;
+                opacity: 1;
             }
 
             .brand-section {
@@ -2734,7 +2773,7 @@
                 </p>
                 <ul class="services-list" style="margin-top: 30px;">
                     <li>아트디저트 테이블 제공 (200만원 상당)</li>
-                    <li>선착순10팀 부케 향수 패키지<br>(180만원 상당)</li>
+                    <li>선착순10팀 부케 향수 패키지(180만원 상당)</li>
                     <li>플라워 데코레이션 10% 할인</li>
                     <li>프리미엄 경험의 완성</li>
                 </ul>
@@ -2868,7 +2907,7 @@
                         <input type="checkbox" id="privacy-agree" name="privacy-agree" class="checkbox-input" required>
                         <label for="privacy-agree" class="checkbox-label">
                             <strong>개인정보 수집 및 상담 활용 동의</strong><br>
-                            개인정보 수집 및 상담 활용에 동의합니다.<br>
+                            개인정보 수집 및 상담 활용에 <br>동의합니다.<br>
                             본 상담카드는 원활한 상담 진행을 위한 목적으로만 활용됩니다.
                         </label>
                     </div>
@@ -2967,11 +3006,6 @@
             }
         });
 
-        // Sidebar close button
-        const sidebarClose = document.getElementById('sidebarClose');
-        if (sidebarClose) {
-            sidebarClose.addEventListener('click', toggleMenu);
-        }
     </script>
 
     <!-- Location Section -->
@@ -3078,6 +3112,7 @@
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+        const sidebarClose = document.getElementById('sidebarClose');
 
         // Menu toggle function
         function toggleMenu() {
@@ -3092,6 +3127,15 @@
 
         // Overlay click to close
         sidebarOverlay.addEventListener('click', toggleMenu);
+        
+        // Sidebar close button click
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+            });
+        }
 
         // Close menu when clicking on a link
         sidebarLinks.forEach(link => {
