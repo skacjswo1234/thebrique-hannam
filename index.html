@@ -2987,6 +2987,48 @@
             return new URLSearchParams(formData);
         }
 
+        function postViaIframe(formElement) {
+            const iframeName = 'inquiryPostFrame';
+            let iframe = document.getElementById(iframeName);
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.name = iframeName;
+                iframe.id = iframeName;
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
+
+            const tempForm = document.createElement('form');
+            tempForm.action = GOOGLE_SCRIPT_URL;
+            tempForm.method = 'POST';
+            tempForm.target = iframeName;
+            tempForm.style.display = 'none';
+
+            const formData = new FormData(formElement);
+            formData.append('submitted_at', new Date().toISOString());
+            formData.append('user_agent', navigator.userAgent);
+
+            formData.forEach((value, key) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = String(value);
+                tempForm.appendChild(input);
+            });
+
+            document.body.appendChild(tempForm);
+            tempForm.submit();
+            document.body.removeChild(tempForm);
+
+            return new Promise((resolve) => {
+                const timer = setTimeout(resolve, 1500);
+                iframe.onload = () => {
+                    clearTimeout(timer);
+                    resolve();
+                };
+            });
+        }
+
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -3013,15 +3055,8 @@
             submitButton.textContent = '처리 중...';
 
             try {
-                const formBody = buildFormBody(form);
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    body: formBody
-                });
-
-                if (!response.ok) {
-                    throw new Error('Request failed');
-                }
+                // Use hidden form + iframe to avoid CORS/preflight issues
+                await postViaIframe(form);
 
                 // Show success modal
                 showModal('신청이 완료되었습니다', [
