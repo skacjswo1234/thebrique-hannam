@@ -2965,12 +2965,24 @@
         });
 
         // Form submission
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyvp7G1ATYq-EEk0McPT-lEehKlNXd9OmbMVjGOmvjgs5y5I4_6hw1G144MfP4W0yrJLA/exec';
         const form = document.getElementById('inquiryForm');
         const modal = document.getElementById('successModal');
         const modalClose = document.getElementById('modalClose');
         const submitButton = document.getElementById('submitButton');
 
-        form.addEventListener('submit', function(e) {
+        function buildPayload(formElement) {
+            const formData = new FormData(formElement);
+            const payload = {};
+            formData.forEach((value, key) => {
+                payload[key] = value;
+            });
+            payload.submitted_at = new Date().toISOString();
+            payload.user_agent = navigator.userAgent;
+            return payload;
+        }
+
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Validate privacy agreement
@@ -2980,21 +2992,39 @@
                 return;
             }
 
+            if (GOOGLE_SCRIPT_URL.includes('REPLACE_WITH_YOUR_SCRIPT_ID')) {
+                alert('구글 시트 연동 URL이 설정되지 않았습니다.');
+                return;
+            }
+
             // Disable submit button
             submitButton.disabled = true;
             submitButton.textContent = '처리 중...';
 
-            // Simulate form submission (replace with actual API call)
-            setTimeout(function() {
+            try {
+                const payload = buildPayload(form);
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Request failed');
+                }
+
                 // Show modal
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
 
                 // Reset form
                 form.reset();
+            } catch (error) {
+                alert('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = '신청하기';
-            }, 500);
+            }
         });
 
         // Close modal
