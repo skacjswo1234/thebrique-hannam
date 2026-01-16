@@ -3008,15 +3008,35 @@
             tempForm.target = iframeName;
             tempForm.style.display = 'none';
 
+            const labelMap = {
+                'name': '신청자 성명',
+                'phone': '연락처',
+                'date1': '예상 예식 날짜 1순위',
+                'date2': '예상 예식 날짜 2순위',
+                'date3': '예상 예식 날짜 3순위',
+                'preferred-time': '선호 시간',
+                'guest-count': '예상 하객',
+                'venue-fee': '대관료',
+                'meal-fee': '식대(1인)',
+                'consultation-date': '상담 희망 날짜',
+                'privacy-agree': '개인정보 수집 및 상담 활용 동의'
+            };
+
             const formData = new FormData(formElement);
             formData.append('submitted_at', new Date().toISOString());
             formData.append('user_agent', navigator.userAgent);
-            console.log('[Inquiry] payload', Object.fromEntries(formData.entries()));
 
+            const payload = {};
             formData.forEach((value, key) => {
+                const label = labelMap[key] || key;
+                payload[label] = value;
+            });
+            console.log('[Inquiry] payload', payload);
+
+            Object.entries(payload).forEach(([label, value]) => {
                 const input = document.createElement('input');
                 input.type = 'hidden';
-                input.name = key;
+                input.name = label;
                 input.value = String(value);
                 tempForm.appendChild(input);
             });
