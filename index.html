@@ -2981,13 +2981,6 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function buildFormBody(formElement) {
-            const formData = new FormData(formElement);
-            formData.append('submitted_at', new Date().toISOString());
-            formData.append('user_agent', navigator.userAgent);
-            return new URLSearchParams(formData);
-        }
-
         function postViaIframe(formElement) {
             console.log('[Inquiry] submit start (iframe)', {
                 action: GOOGLE_SCRIPT_URL
@@ -3023,9 +3016,6 @@
             };
 
             const formData = new FormData(formElement);
-            formData.append('submitted_at', new Date().toISOString());
-            formData.append('user_agent', navigator.userAgent);
-
             const payload = {};
             formData.forEach((value, key) => {
                 const label = labelMap[key] || key;
