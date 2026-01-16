@@ -2974,6 +2974,7 @@
         const modalMessage = document.getElementById('modalMessage');
 
         function showModal(title, messageLines) {
+            console.log('[Inquiry] modal:', title, messageLines);
             modalTitle.textContent = title;
             modalMessage.innerHTML = messageLines.map(line => `<p>${line}</p>`).join('');
             modal.classList.add('active');
@@ -2988,6 +2989,9 @@
         }
 
         function postViaIframe(formElement) {
+            console.log('[Inquiry] submit start (iframe)', {
+                action: GOOGLE_SCRIPT_URL
+            });
             const iframeName = 'inquiryPostFrame';
             let iframe = document.getElementById(iframeName);
             if (!iframe) {
@@ -3007,6 +3011,7 @@
             const formData = new FormData(formElement);
             formData.append('submitted_at', new Date().toISOString());
             formData.append('user_agent', navigator.userAgent);
+            console.log('[Inquiry] payload', Object.fromEntries(formData.entries()));
 
             formData.forEach((value, key) => {
                 const input = document.createElement('input');
@@ -3021,8 +3026,12 @@
             document.body.removeChild(tempForm);
 
             return new Promise((resolve) => {
-                const timer = setTimeout(resolve, 1500);
+                const timer = setTimeout(() => {
+                    console.log('[Inquiry] iframe timeout - assume sent');
+                    resolve();
+                }, 1500);
                 iframe.onload = () => {
+                    console.log('[Inquiry] iframe loaded - request completed');
                     clearTimeout(timer);
                     resolve();
                 };
@@ -3031,6 +3040,7 @@
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
+            console.log('[Inquiry] form submit click');
             
             // Validate privacy agreement
             const privacyAgree = document.getElementById('privacy-agree');
@@ -3049,6 +3059,7 @@
                 ]);
                 return;
             }
+            console.log('[Inquiry] url ready', GOOGLE_SCRIPT_URL);
 
             // Disable submit button
             submitButton.disabled = true;
@@ -3057,6 +3068,7 @@
             try {
                 // Use hidden form + iframe to avoid CORS/preflight issues
                 await postViaIframe(form);
+                console.log('[Inquiry] post completed (assumed)');
 
                 // Show success modal
                 showModal('신청이 완료되었습니다', [
@@ -3068,6 +3080,7 @@
                 // Reset form
                 form.reset();
             } catch (error) {
+                console.error('[Inquiry] post failed', error);
                 showModal('전송에 실패했습니다', [
                     '일시적인 오류가 발생했습니다.',
                     '잠시 후 다시 시도해주세요.'
